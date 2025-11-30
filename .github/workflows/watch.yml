@@ -11,14 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      
+
+      - name: Restore job state cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.lever-watcher
+          key: lever-state-${{ secrets.LEVER_COMPANY_ID }}
+
       - name: Install
         run: pip install .
-      
+
       - name: Check jobs
         env:
           # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
