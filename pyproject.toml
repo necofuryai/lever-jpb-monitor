@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lever-job-watcher"
+version = "0.1.0"
+description = "Monitor job postings on Lever and send notifications"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.25.0",
+    "click>=8.0.0",
+]
+
+[project.scripts]
+lever-watcher = "lever_watcher.cli:cli"
