@@ -1,6 +1,7 @@
 # lever_watcher/notifier.py
 from abc import ABC, abstractmethod
 import httpx
+from .client import LeverJob
 
 class Notifier(ABC):
     @abstractmethod
