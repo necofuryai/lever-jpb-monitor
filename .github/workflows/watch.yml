@@ -1,0 +1,27 @@
+# .github/workflows/watch.yml
+name: Watch Lever Jobs
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # 15分ごと
+  workflow_dispatch:
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install
+        run: pip install lever-job-watcher
+      
+      - name: Check jobs
+        env:
+          # SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          lever-watcher watch ${{ secrets.LEVER_COMPANY_ID }} --query "${{ secrets.LEVER_QUERY }}" --pattern "${{ secrets.LEVER_PATTERN }}"
