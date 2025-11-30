@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 from dataclasses import asdict
+from .client import LeverJob
 
 class JobDiffer:
     def __init__(self, storage_path: Path):
