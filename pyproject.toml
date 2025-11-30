@@ -15,3 +15,6 @@ dependencies = [
 
 [project.scripts]
 lever-watcher = "lever_watcher.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["lever_watcher"]
