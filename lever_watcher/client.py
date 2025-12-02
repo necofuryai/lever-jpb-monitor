@@ -38,7 +38,7 @@ class LeverClient:
                 location=job.get("categories", {}).get("location", "Unknown"),
                 commitment=job.get("categories", {}).get("commitment"),
                 description=job.get("descriptionPlain", ""),
-                apply_url=job["applyUrl"],
+                apply_url=job["applyUrl"].rstrip("/apply"),
                 created_at=job["createdAt"],
             )
             for job in response.json()
