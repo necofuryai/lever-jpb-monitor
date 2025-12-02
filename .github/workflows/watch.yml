@@ -26,13 +26,6 @@ jobs:
 
           echo "PREVIOUS_RUN_ID=$PREVIOUS_RUN_ID" >> $GITHUB_ENV
 
-      - name: Check if previous run exists
-        run: |
-          if [ -z "$PREVIOUS_RUN_ID" ] || [ "$PREVIOUS_RUN_ID" = "null" ]; then
-            echo "No previous run found"
-            exit 0
-          fi
-
       - name: Restore job state cache
         id: cache-restore
         uses: actions/cache/restore@v4
