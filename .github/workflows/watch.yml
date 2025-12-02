@@ -3,8 +3,7 @@ name: Watch Lever Jobs
 
 on:
   schedule:
-    # - cron: '*/15 * * * *'  # 15分ごと
-    - '0 0 * * 6'
+     - cron: '*/15 * * * *'  # 15分ごと
   workflow_dispatch:
 
 jobs:
@@ -18,7 +17,8 @@ jobs:
           python-version: '3.12'
 
       - name: Restore job state cache
-        uses: actions/cache@v4
+        id: cache-restore
+        uses: actions/cache/restore@v4
         with:
           path: ~/.lever-watcher
           key: lever-state-${{ secrets.LEVER_COMPANY_ID }}
@@ -35,3 +35,10 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           lever-watcher watch ${{ secrets.LEVER_COMPANY_ID }} --query "${{ secrets.LEVER_QUERY }}" --pattern "${{ secrets.LEVER_PATTERN }}"
+
+      - name: Save job state cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: ~/.lever-watcher
+          key: lever-state-${{ secrets.LEVER_COMPANY_ID }}
