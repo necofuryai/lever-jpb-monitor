@@ -1,0 +1,22 @@
+# .github/workflows/keep-alive.yml
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'  # 毎月1日の午前0時(UTC)に実行
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Keep workflow alive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "chore: keep workflow alive"
+          git push
