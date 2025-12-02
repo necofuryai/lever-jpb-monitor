@@ -3,7 +3,8 @@ name: Watch Lever Jobs
 
 on:
   schedule:
-    - cron: '*/15 * * * *'  # 15分ごと
+    # - cron: '*/15 * * * *'  # 15分ごと
+    - '0 0 * * 6'
   workflow_dispatch:
 
 jobs:
@@ -21,7 +22,6 @@ jobs:
         with:
           path: ~/.lever-watcher
           key: lever-state-${{ secrets.LEVER_COMPANY_ID }}
-          save-always: true
 
       - name: Debug cache contents
         run: cat ~/.lever-watcher/*.json || echo "No cache files found"
