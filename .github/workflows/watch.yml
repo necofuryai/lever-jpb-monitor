@@ -3,8 +3,7 @@ name: Watch Lever Jobs
 
 on:
   schedule:
-    #  - cron: '*/15 * * * *'  # 15分ごと
-     - '0 0 * * 6'
+    - cron: '*/15 * * * *'  # 15分ごと
   workflow_dispatch:
 
 jobs:
