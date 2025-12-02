@@ -9,6 +9,12 @@ on:
 jobs:
   watch:
     runs-on: ubuntu-latest
+
+    # 🔒 Prevent concurrent runs to avoid duplicate notifications
+    concurrency:
+      group: lever-watcher-${{ secrets.LEVER_COMPANY_ID }}
+      cancel-in-progress: false
+
     steps:
       - uses: actions/checkout@v4
 
