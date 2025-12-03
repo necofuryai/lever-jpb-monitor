@@ -6,6 +6,10 @@ on:
     - cron: '*/15 * * * *'  # 15分ごと
   workflow_dispatch:
 
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: false
+
 jobs:
   watch:
     runs-on: ubuntu-latest
